@@ -3,7 +3,7 @@ incdir = -I src/
 builddir = build
 
 rule cc
-  command = clang -MMD -MF $out.d $cflags $incdir -c $in -o $out
+  command = clang -std=c11 -MMD -MF $out.d $cflags $incdir -c $in -o $out
   depfile = $out.d
   deps = gcc
 
