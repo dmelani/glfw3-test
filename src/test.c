@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <GLFW/glfw3.h>
+#include "test.h"
+#include "engine.h"
 
 GLFWwindow * w;
 
@@ -34,13 +35,17 @@ init() {
 	printf("OK\n");
 
 	printf("Creating window... ");
-	if ((w = glfwCreateWindow(800, 600, "Derp", glfwGetPrimaryMonitor(), NULL)) == NULL)
+	if ((w = glfwCreateWindow(800, 600, "Derp", NULL, NULL)) == NULL)
 		exit(EXIT_FAILURE);
 	printf("OK\n");
-	
+
+	printf("Setting OpenGL context... ");
+	glfwMakeContextCurrent(w);
+	printf("OK\n");
 }
 
 int
 main() {
 	init();
+	run();
 }

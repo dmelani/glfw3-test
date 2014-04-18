@@ -10,6 +10,7 @@ rule cc
 rule link
   command = clang $libs $in -o $out
 
+build $builddir/engine.o: cc src/engine.c
 build $builddir/test.o: cc src/test.c
-build bin/test: link $builddir/test.o
+build bin/test: link $builddir/test.o $builddir/engine.o
   libs = -lglfw3 -framework OpenGL
