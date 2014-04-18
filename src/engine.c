@@ -1,5 +1,6 @@
 #include "test.h"
 #include "engine.h"
+#include "scene.h"
 extern GLFWwindow * w;
 
 static void
@@ -27,30 +28,18 @@ reset_gl() {
 	glLoadIdentity();
 }
 
-static void
-draw_triangle() {
-	glPushMatrix();
-	glRotatef((float) glfwGetTime() * 50.0f, 0.0f, 0.0f, 1.0f);
-
-	glBegin(GL_TRIANGLES);
-	glColor3f(1.f, 0.f, 0.f);
-	glVertex3f(-0.6f, -0.4f, 0.f);
-	glColor3f(0.f, 1.f, 0.f);
-	glVertex3f(0.6f, -0.4f, 0.f);
-	glColor3f(0.f, 0.f, 1.f);
-	glVertex3f(0.f, 0.6f, 0.f);
-	glEnd();
-
-	glPopMatrix();
-}
 
 void
 run() {
 	glfwSetKeyCallback(w, key_cb);
+	scene_init();
 
 	while (!glfwWindowShouldClose(w)) {
 		reset_gl();
-		draw_triangle();
+
+		scene_update();
+		scene_render();
+
 		glfwSwapBuffers(w);
 		glfwPollEvents();
 	}
