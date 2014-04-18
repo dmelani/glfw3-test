@@ -1,0 +1,15 @@
+cflags = -Wall
+incdir = -I src/
+builddir = build
+
+rule cc
+  command = clang -MMD -MF $out.d $cflags $incdir -c $in -o $out
+  depfile = $out.d
+  deps = gcc
+
+rule link
+  command = clang $libs $in -o $out
+
+build $builddir/test.o: cc src/test.c
+build bin/test: link $builddir/test.o
+  libs = -lglfw3 -framework OpenGL
