@@ -13,4 +13,4 @@ rule link
 build $builddir/engine.o: cc src/engine.c
 build $builddir/test.o: cc src/test.c
 build bin/test: link $builddir/test.o $builddir/engine.o
-  libs = -lglfw3 -framework OpenGL
+  libs = -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
