@@ -1,9 +1,9 @@
-cflags = -Wall
+cflags = -Wall -std=c11 -ggdb
 incdir = -I src/
 builddir = build
 
 rule cc
-  command = clang -std=c11 -MMD -MF $out.d $cflags $incdir -c $in -o $out
+  command = clang -MMD -MF $out.d $cflags $incdir -c $in -o $out
   depfile = $out.d
   deps = gcc
 
@@ -11,7 +11,8 @@ rule link
   command = clang $libs $in -o $out
 
 build $builddir/engine.o: cc src/engine.c
+build $builddir/triangle.o: cc src/triangle.c
 build $builddir/scene.o: cc src/scene.c
 build $builddir/test.o: cc src/test.c
-build bin/test: link $builddir/test.o $builddir/engine.o $builddir/scene.o
+build bin/test: link $builddir/test.o $builddir/engine.o $builddir/scene.o $builddir/triangle.o
   libs = -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
