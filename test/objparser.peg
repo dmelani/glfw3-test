@@ -1,0 +1,7 @@
+grammar <- spacing object EOF
+object <- 
+spacing <- ( space / comment)*
+comment <- '#' (!EOL .)* EOL
+space <- ' ' / '\t' / EOL
+EOL <- '\n' / '\r\n' / '\r'
+EOF <- !.
