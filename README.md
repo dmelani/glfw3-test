@@ -7,3 +7,4 @@ else.
 
 Libraries currently used by this project:
 - GLFW version 3
+- Libconfig
