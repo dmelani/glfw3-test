@@ -24,6 +24,6 @@ build $builddir/scene.o: cc src/scene.c
 build $builddir/test.o: cc src/test.c
 
 build bin/test: link $builddir/test.o $builddir/engine.o $builddir/scene.o $builddir/triangle.o
-  libs = -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
+  libs = -lconfig -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
 
 build bin/testparser: link $builddir/testparser.o
