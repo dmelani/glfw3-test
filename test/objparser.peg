@@ -4,7 +4,7 @@ statement <- (material_library / vertex / object_name / smoothing_group / materi
 material_library <- MTLLIB < [a-zA-Z0-9.]+ > {printf("Material library %s\n", yytext);}
 vertex <- VERTEX <(FLOAT)+> {printf("Vertex %s\n", yytext);}
 face <- FACE <(INT)+> {printf("Face %s\n", yytext);}
-object_name <- OBJECT < [a-zA-Z0-9.]+ > {printf("Object %s\n", yytext);}
+object_name <- OBJECT < [a-zA-Z0-9.]+ > {obj.name = strdup(yytext);}
 material_name <- MATERIAL < [a-zA-Z0-9.]+ > {printf("Material %s\n", yytext);}
 smoothing_group <- SMOOTH < [a-zA-Z0-9.]+ > {("Smooting group %s\n", yytext);}
 spacing <- ( SPACE / comment)*

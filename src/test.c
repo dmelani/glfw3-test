@@ -3,6 +3,7 @@
 #include "test.h"
 #include "engine.h"
 
+const char *wn = "Derp";
 GLFWwindow * w;
 config_t cfg;
 
@@ -30,6 +31,7 @@ deinit() {
 static void
 init() {
 	int width, height;
+	int fs;
 
 	config_init(&cfg);
 	printf("Loading config... ");
@@ -52,7 +54,18 @@ init() {
 	printf("Creating window... ");
 	config_lookup_int(&cfg, "test.window.size.w", &width);
 	config_lookup_int(&cfg, "test.window.size.h", &height);
-	if ((w = glfwCreateWindow(width, height, "Derp", NULL, NULL)) == NULL) {
+	config_lookup_bool(&cfg, "test.window.fullscreen", &fs);
+	if (fs) {
+		GLFWmonitor *m = glfwGetPrimaryMonitor();
+		if (!m) {
+			printf("FAILED!\n");
+			exit(EXIT_FAILURE);
+		}
+		w = glfwCreateWindow(width, height, wn, m, NULL);
+	} else {
+		w = glfwCreateWindow(width, height, wn, NULL, NULL);
+	}
+	if (w == NULL) {
 		printf("FAILED!\n");
 		exit(EXIT_FAILURE);
 	}
