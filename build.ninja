@@ -18,6 +18,8 @@ build $builddir/objparser.peg.c: peg test/objparser.peg
 build $builddir/testparser.o: cc test/testparser.c
   cwarnflags = -Wall -Wno-unused-function -Wno-unused-value
 
+build $builddir/handrolled.o: cc test/handrolled.c
+
 build $builddir/engine.o: cc src/engine.c
 build $builddir/triangle.o: cc src/triangle.c
 build $builddir/scene.o: cc src/scene.c
@@ -27,3 +29,5 @@ build bin/test: link $builddir/test.o $builddir/engine.o $builddir/scene.o $buil
   libs = -lconfig -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
 
 build bin/testparser: link $builddir/testparser.o
+
+build bin/handrolled: link $builddir/handrolled.o
